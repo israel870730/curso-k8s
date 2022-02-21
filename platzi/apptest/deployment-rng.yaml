@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rng
+  namespace: apptest
+  labels:
+    app: rng
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rng 
+  template:
+    metadata:
+      labels:
+        app: rng
+    spec:
+      containers:
+      - name: rng
+        image: dockercoins/rng:v0.1

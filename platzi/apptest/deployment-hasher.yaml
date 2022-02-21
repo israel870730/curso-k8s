@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hasher
+  namespace: apptest
+  labels:
+    app: hasher
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hasher 
+  template:
+    metadata:
+      labels:
+        app: hasher
+    spec:
+      containers:
+      - name: hasher
+        #image: dockercoins/hasher:v0.1
+        image: dockercoins/hasher:v0.1

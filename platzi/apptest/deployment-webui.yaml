@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webui
+  namespace: apptest
+  labels:
+    app: webui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webui 
+  template:
+    metadata:
+      labels:
+        app: webui
+    spec:
+      containers:
+      - name: webui
+        image: dockercoins/webui:v0.1

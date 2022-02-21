@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rng
+  namespace: apptest
+  labels:
+    app: rng
+spec:
+  type: ClusterIP
+  selector:
+    app: rng 
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80 
