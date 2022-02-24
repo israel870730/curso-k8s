@@ -1,0 +1,3 @@
+kubectl create secret generic passwords --from-literal=pass-root=kubernetes --from-literal=pass-usu=kubernetes
+
+kubectl create secret generic datos --from-file=datos.txt

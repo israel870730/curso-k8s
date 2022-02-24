@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod3
+spec:
+  containers:
+    - name: test-container
+      image: ubuntu
+      command: [ "/bin/sh", "-c", "sleep 1000000" ]
+      env:
+        - name: var2
+          valueFrom:
+            secretKeyRef:
+              name: nombres1
+              key: nombre1
+        - name: var1
+          valueFrom:
+            secretKeyRef:
+              name: nombres1
+              key: nombre2
+  restartPolicy: Never

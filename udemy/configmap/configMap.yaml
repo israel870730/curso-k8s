@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  password: pass1
+  usuario: usu1
+  nombre: israel
+  edad: '35'
+kind: ConfigMap
+metadata:
+  name: cf2
+  namespace: udemy
