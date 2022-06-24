@@ -1,0 +1,4 @@
+Con este fichero podemos establecer cual serian los recursos fisicos que van a consumir los po dentro de este namespac
+1- kubectl apply -f limitex.yaml
+2- kubectl describe namespace
+3- 

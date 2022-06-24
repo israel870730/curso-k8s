@@ -1,0 +1,23 @@
+# YAML example
+# liveness-pod-example.yaml
+#
+apiVersion: v1 
+kind: Pod 
+metadata: 
+  name: liveness-command 
+spec: 
+  containers: 
+  - name: liveness 
+    image: nginx 
+    ports: 
+        - containerPort: 80 
+    livenessProbe: 
+      exec:
+        command:
+        - cat
+        - /usr/share/nginx/html/index.html
+      initialDelaySeconds: 2 #Default 0 
+      periodSeconds: 2 #Default 10 
+      timeoutSeconds: 1 #Default 1 
+      successThreshold: 1 #Default 1 
+      failureThreshold: 3 #Default 3

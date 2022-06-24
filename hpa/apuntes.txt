@@ -1,0 +1,33 @@
+Documentacion de Oficial de AWS
+https://docs.aws.amazon.com/es_es/eks/latest/userguide/horizontal-pod-autoscaler.html
+
+https://www.youtube.com/watch?v=T6wRsmrm_gk
+
+https://github.com/pablokbs/peladonerd/tree/master/kubernetes/5
+
+******************  Pasos para aplicar el HPA en un cluster ****************
+
+1- 
+kubectl apply -f https://k8s.io/examples/application/php-apache.yaml
+
+2-
+kubectl autoscale deployment php-apache --cpu-percent=50 --min=1 --max=10
+
+3-
+kubectl get hpa
+
+4-
+kubectl run -i \
+    --tty load-generator \
+    --rm --image=busybox \
+    --restart=Never \
+    -- /bin/sh -c "while sleep 0.01; do wget -q -O- http://php-apache; done"
+
+5-
+kubectl get hpa php-apache
+
+6-
+kubectl get hpa
+
+7-
+kubectl delete deployment.apps/php-apache service/php-apache horizontalpodautoscaler.autoscaling/php-apache

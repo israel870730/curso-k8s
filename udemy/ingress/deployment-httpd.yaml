@@ -5,6 +5,9 @@ metadata:
   namespace: udemy
   labels:
     app: apache
+  annotations:
+    doc: "Annotations de ejemplo 1"
+    adjunto: "Ejemplo de annotations 2"
 spec:
   replicas: 1
   selector:

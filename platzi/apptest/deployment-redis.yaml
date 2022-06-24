@@ -18,3 +18,9 @@ spec:
       containers:
       - name: redis
         image: redis
+        livenessProbe:
+          exec:
+            command:
+            - redis-cli 
+            - ping 
+          failureThreshold: 3
