@@ -24,3 +24,10 @@ spec:
              name: nginx
              port:
                number: 80
+       - path: /prueba
+         pathType: Prefix
+         backend:
+           service:
+             name: nginx
+             port:
+               number: 80
