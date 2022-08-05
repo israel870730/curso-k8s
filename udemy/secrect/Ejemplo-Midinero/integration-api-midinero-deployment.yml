@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: integration-api-midinero-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: integration-api-midinero
+  template:
+    metadata:
+      labels:
+        app: integration-api-midinero
+    spec:
+      #serviceAccountName: integration-api-midinero
+      containers:
+      - name: integration-api-midinero
+        image: 461936654678.dkr.ecr.us-east-1.amazonaws.com/prod-bp-integration-api-midinero:6948
+        resources:
+          limits:
+            memory: 128Mi
+            cpu: 200m
+        ports:
+        - containerPort: 80
+        envFrom:
+        - configMapRef:
+            name: integration-api-midinero-configmap
+        - secretRef:
+            name: integration-api-midinero-secret
+        - secretRef:
+            name: general-secret
+        volumeMounts:
+        - mountPath: "/etc/ssl/certs"
+          name: cert-midinero-secret
+          readOnly: true
+      volumes:
+        - name: cert-midinero-secret
+          secret:
+            secretName: cert-midinero-secret

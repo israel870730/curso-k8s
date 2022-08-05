@@ -4,5 +4,5 @@ data:
   MYSQL_USER: usudb
 kind: ConfigMap
 metadata:
-  name: config-map-ysql
+  name: config-map-mysql
   namespace: udemy

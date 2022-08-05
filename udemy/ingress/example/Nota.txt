@@ -1,0 +1,2 @@
+Luego en el fichero host del servidor pongo 
+curso.prueba.com apuntando a la ip del servidor

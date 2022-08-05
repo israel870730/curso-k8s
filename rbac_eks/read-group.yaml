@@ -1,0 +1,22 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: reader-dev
+rules:
+- apiGroups: ["*"]
+  resources: ["deployments", "configmaps", "pods", "secrets", "services"]
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: reader-dev
+subjects:
+- kind: Group
+  name: reader-dev
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: reader-dev
+  apiGroup: rbac.authorization.k8s.io

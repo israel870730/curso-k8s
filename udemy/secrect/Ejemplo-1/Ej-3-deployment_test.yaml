@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  namespace: udemy
+  labels:
+    app: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        resources:
+          limits:
+            memory: 128Mi
+            cpu: 200m
+        ports:
+        - containerPort: 80
+        envFrom:
+        - configMapRef:
+            name: config-test
+        - secretRef:
+            name: secret-test
+        volumeMounts:
+        - mountPath: "/etc/ssl/certs"
+          name: secret-test
+          readOnly: true
+      volumes:
+        - name: secret-test
+          secret:
+            secretName: secret-test
