@@ -1,21 +1,29 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-   name: ingress-prometheus-community
-   namespace: prometheus-community
-   annotations:
-     nginx.org/hsts: "true"
-     nginx.org/keepalive: "300"
-     nginx.org/location-snippets: ""
-     nginx.org/redirect-to-https: "true"
-     nginx.org/rewrites: ""
-     nginx.org/server-snippets: ""
+  name: ingress-prometheus-community
+  #namespace: ingress-nginx-2
+  annotations:
+    #nginx.org/hsts: "true"
+    #nginx.org/keepalive: "300"
+    #nginx.org/location-snippets: ""
+    #nginx.org/redirect-to-https: "true"
+    #nginx.org/rewrites: ""
+    #nginx.org/server-snippets: ""
+    #alb.ingress.kubernetes.io/scheme: internal
+    kubernetes.io/ingress.class: "nginx"
+    #external-dns.alpha.kubernetes.io/hostname: dev.bamboopayment.com
+    #external-dns.alpha.kubernetes.io/ingress-hostname-source: annotation-only
 spec:
-   rules:
-   - host: monitoring-core.prod.bamboopayment.com
-     http:
-       paths:
-       - backend:
-          serviceName: monitoring-grafana
-          servicePort: 80
-         path: /
+   #ingressClassName: ingress-nginx-controller
+  rules:
+  - host: monitoring-core.test.bamboopayment.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: monitoring-grafana
+            port:
+              number: 80
+        path: /
+        pathType: Prefix

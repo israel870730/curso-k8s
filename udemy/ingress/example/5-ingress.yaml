@@ -1,33 +1,49 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-   name: ingress-apache
-   namespace: udemy
+   name: ingress-externaldns
+   namespace: externaldns
    annotations:
-     nginx.ingress.kubernetes.io/rewrite-target: /
+     kubernetes.io/ingress.class: "nginx"    
+     #kubernetes.io/ingress.class: "alb"
+     alb.ingress.kubernetes.io/scheme: internal
+     external-dns.alpha.kubernetes.io/hostname: prueba.externaldns.com
+     external-dns.alpha.kubernetes.io/ingress-hostname-source: annotation-only
 spec:
-   rules:
-   - host: curso.prueba.com
-     http:
-       paths:
-       - path: /apache
-         pathType: Prefix
-         backend:
-           service:
-             name: apache
-             port: 
-               number: 80
-       - path: /nginx
-         pathType: Prefix
-         backend:
-           service:
-             name: nginx
-             port:
-               number: 80
-       - path: /prueba
-         pathType: Prefix
-         backend:
-           service:
-             name: nginx
-             port:
-               number: 80
+  ingressClassName: nginx # Ingress Class
+  rules:
+  #- host: curso.prueba.com
+  - host: test1.externaldns.com
+    http:
+      paths:
+        - backend:
+            service:
+              name: apache
+              port:
+                number: 80
+          path: /apache
+          pathType: Prefix
+  - host: test.externaldns.com
+    http:
+      paths:
+      - path: /apache
+        pathType: Prefix
+        backend:
+          service:
+            name: apache
+            port: 
+              number: 80
+      - path: /nginx
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx
+            port:
+              number: 80
+      - path: /prueba
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx
+            port:
+              number: 80

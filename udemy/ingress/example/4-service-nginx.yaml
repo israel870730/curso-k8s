@@ -4,9 +4,15 @@ metadata:
   labels:
     app: nginx
   name: nginx
-  namespace: udemy
+  namespace: externaldns
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: svc2.externaldns.com
+    external-dns.alpha.kubernetes.io/ttl: "30"
+    alb.ingress.kubernetes.io/scheme: internal
 spec:
-  type: NodePort
+  #type: NodePort
+  #type: ClusterIP
+  type: LoadBalancer
   selector:
     app: nginx
   ports:
